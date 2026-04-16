@@ -2,20 +2,21 @@ package main
 
 import (
 	"rpg_generator/internal/database"
-	"rpg_generator/internal/module/generation/handler"
-	"rpg_generator/internal/module/generation/repository"
-	"rpg_generator/internal/module/generation/service"
+	"rpg_generator/internal/module/task/handler"
+	"rpg_generator/internal/module/task/repository"
+	"rpg_generator/internal/module/task/service"
 	"rpg_generator/internal/router"
 )
 
 func main() {
 	db := database.DB_INIT()
-	storyDao := repository.NewStoryDaoInstance(db)
-	storyService := service.NewStoryService(storyDao)
-	postHandler := handler.NewStoryHandler(storyService)
+	taskDao := repository.NewTaskDaoInstance(db)
+	taskResultDao := repository.NewTaskResultDaoInstance(db)
+	taskService := service.NewTaskService(taskDao, taskResultDao)
+	postHandler := handler.NewTaskHandler(taskService)
 
 	routers := router.SetUpRouters(&router.Handlers{
-		Story: postHandler,
+		Task: postHandler,
 	})
 	routers.Run(":8080")
 

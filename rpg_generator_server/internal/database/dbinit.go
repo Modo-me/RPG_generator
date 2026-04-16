@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"os"
-	"rpg_generator/internal/module/generation/repository"
+	"rpg_generator/internal/module/task/repository"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -26,7 +26,7 @@ func DB_INIT() *gorm.DB {
 }
 
 func DbSync(db *gorm.DB) error {
-	err := db.AutoMigrate(&repository.Story{})
+	err := db.AutoMigrate(&repository.Task{})
 	if err != nil {
 		return err
 	}

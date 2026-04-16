@@ -1,20 +1,20 @@
 package router
 
 import (
-	"rpg_generator/internal/module/generation/handler"
+	"rpg_generator/internal/module/task/handler"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Handlers struct {
-	Story *handler.StoryHandler
+	Task *handler.TaskHandler
 }
 
 func SetUpRouters(h *Handlers) *gin.Engine {
 	router := gin.Default()
 	api := router.Group("/api")
 	{
-		api.POST("/stories", h.Story.AddStory)
+		api.POST("/tasks", h.Task.CreateTask)
 	}
 	return router
 }
