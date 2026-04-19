@@ -11,7 +11,7 @@ import (
 
 func DB_INIT() *gorm.DB {
 	host := os.Getenv("DB_HOST")
-	dsn := "user=usrnanme password=yourpasswd  host=%s port=5432 dbname=commentsDB sslmode=disable"
+	dsn := "user=caim password=123456  host=%s port=5432 dbname=rpgDB sslmode=disable"
 	dsn = fmt.Sprintf(dsn, host)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -27,6 +27,10 @@ func DB_INIT() *gorm.DB {
 
 func DbSync(db *gorm.DB) error {
 	err := db.AutoMigrate(&repository.Task{})
+	if err != nil {
+		return err
+	}
+	err = db.AutoMigrate(&repository.TaskResult{})
 	if err != nil {
 		return err
 	}

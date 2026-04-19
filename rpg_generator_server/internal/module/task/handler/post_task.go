@@ -2,20 +2,9 @@ package handler
 
 import (
 	"rpg_generator/internal/module/task/repository"
-	"rpg_generator/internal/module/task/service"
 
 	"github.com/gin-gonic/gin"
 )
-
-type TaskHandler struct {
-	taskService *service.TaskService
-}
-
-func NewTaskHandler(taskService *service.TaskService) *TaskHandler {
-	return &TaskHandler{
-		taskService: taskService,
-	}
-}
 
 func (h *TaskHandler) CreateTask(c *gin.Context) {
 	var newTask repository.Task

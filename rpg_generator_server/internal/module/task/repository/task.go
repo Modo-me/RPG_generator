@@ -37,7 +37,7 @@ func (dao *TaskDao) AddTask(task *Task) error {
 	return result.Error
 }
 
-func (dao *TaskDao) DeleteTaskById(id uint) error {
+func (dao *TaskDao) DeleteTaskByIdw(id uint) error {
 	result := dao.db.Delete(&Task{}, id)
 	return result.Error
 }
